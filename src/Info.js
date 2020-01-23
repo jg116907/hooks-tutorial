@@ -1,46 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useReducer } from 'react';
+
+function reducer(state, action) {
+    return {
+        ...state,
+        [action.name]: action.value
+    };
+}
 
 const Info = () => {
-    const [name, setName] = useState('');
-    const [nickname, setNickName] = useState('');
-    // useEffect(() => {  // componentDidUpdate
-    //     console.log('렌더링 완료')
-    //     console.log({
-    //         name,
-    //         nickname,
-    //     });
-    // });
-
-    // useEffect(() => { // componentDidMount
-    //     console.log('마운트 될 때만 실행')
-    // }, []);
-
-    // useEffect(() => {
-    //     console.log(name);
-    // }, [name]); // name이 변경될 때만 호출
-
-    useEffect(() => { 
-        console.log('effect');
-        console.log(name);
-        return () => { // unmount 혹은 update 되기 전에 작업을 수행
-            console.log('cleanup');
-            console.log(name);
-        };
+    const [state, dispatch] = useReducer(reducer, {
+       name: '',
+       nickname: '', 
     });
-
-    const onChangeName = e => {
-        setName(e.target.value);
+    const { name, nickname } = state;
+    const onChange = e => {
+        dispatch(e.target);
     };
-
-    const onChangeNickName = e => {
-        setNickName(e.target.value);
-    };
-
+    
     return (
         <div>
             <div>
-                <input value={name} onChange={onChangeName} />
-                <input value={nickname} onChange={onChangeNickName} />
+                <input name="name" value={name} onChange={onChange} />
+                <input name="nickname" value={nickname} onChange={onChange} />
             </div>
             <div>
                 <div>
