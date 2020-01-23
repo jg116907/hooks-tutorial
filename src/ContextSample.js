@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext} from 'react';
 
 const ThemeContext = createContext('black');
 const ContextSample = () => {
@@ -8,7 +8,11 @@ const ContextSample = () => {
       height: '24px',
       background: theme
     };
-    return <div style={style} />;
+    return(
+        <div>
+            <div style={style} />
+        </div>
+    );
 };
 
 export default ContextSample
